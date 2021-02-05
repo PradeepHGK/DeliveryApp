@@ -83,51 +83,109 @@ class _HomePageState extends State<HomePage> {
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(10),
                                           bottomLeft: Radius.circular(10))),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topRight,
-                                        child: IconButton(
-                                            icon: categoryWishContainer
-                                                    .contains(index)
-                                                ? Icon(
-                                                    CupertinoIcons.heart_solid,
-                                                    color: Colors.red)
-                                                : Icon(CupertinoIcons.heart,
-                                                    color: Colors.red),
-                                            onPressed: () {
-                                              print("Add_Wishlist $index");
-                                              setState(() {
-                                                isWishListSelected = index;
-                                                isSelected = isSelected;
-                                                if (!categoryWishContainer
-                                                    .contains(index)) {
-                                                  categoryWishContainer
-                                                      .add(index);
-                                                  isSelected = true;
-                                                } else {
-                                                  print(categoryWishContainer
-                                                      .length);
-                                                  categoryWishContainer
-                                                      .remove(index);
-                                                }
-                                              });
-                                            }),
+                                  child: Stack(children: [
+                                    Align(
+                                      alignment: Alignment.topRight,
+                                      child: IconButton(
+                                          icon: categoryWishContainer
+                                                  .contains(index)
+                                              ? Icon(CupertinoIcons.heart_solid,
+                                                  color: Colors.red)
+                                              : Icon(
+                                                  CupertinoIcons.heart,
+                                                  color: Colors.red,
+                                                ),
+                                          onPressed: () {
+                                            print("Add_Wishlist $index");
+                                            setState(() {
+                                              isWishListSelected = index;
+                                              isSelected = isSelected;
+                                              if (!categoryWishContainer
+                                                  .contains(index)) {
+                                                categoryWishContainer
+                                                    .add(index);
+                                                isSelected = true;
+                                              } else {
+                                                print(categoryWishContainer
+                                                    .length);
+                                                categoryWishContainer
+                                                    .remove(index);
+                                              }
+                                            });
+                                          }),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SvgPicture.asset(
+                                            "images/svg/offer.svg",
+                                            height: 80,
+                                            alignment: Alignment.center,
+                                          ),
+                                          Container(
+                                            height: 20,
+                                            width: 40,
+                                            decoration: BoxDecoration(
+                                                color: Colors.green,
+                                                borderRadius:
+                                                    BorderRadius.circular(4)),
+                                            child: Text(
+                                              "500 g",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          Text(
+                                            "Fruit Title $index",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.blue,
+                                                fontSize: 20),
+                                          ),
+                                          Text(
+                                            "35\$",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          TextButton(
+                                              onPressed: () {
+                                                print("Add to cart");
+                                              },
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.shopping_bag,
+                                                    color: Colors.greenAccent,
+                                                  ),
+                                                  Text(
+                                                    "Add to cart",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.green[800],
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ))
+                                        ],
                                       ),
-                                      SvgPicture.asset(
-                                        "images/svg/offer.svg",
-                                        height: 100,
-                                        alignment: Alignment.center,
-                                      ),
-                                      Text(
-                                        "Fruit Title $index",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.blue,
-                                            fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ]),
                                 ),
                               ),
                             );
